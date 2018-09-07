@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>上传文件</title>
+    <script src="../libs/vue-2.5.16.js"></script>
+    <!--<script src="https://vuejs.org/js/vue.js"></script>-->
+
+</head>
+<body>
+<div id="app">
+    <form >
+        <input class="file" name="file" type="file" accept="image/png,image/gif,image/jpeg" @change="selectImg($event)"/>
+        <input type="button" @click="upload" value="提交">
+    </form>
+</div>
+</body>
+<script>
+
+    new Vue({
+        el:"#app",
+        data:{
+          "fileData":"",
+        },
+        methods:{
+            selectImg:function (e) {
+                // console.log("update=="+e.target);
+                let file = e.target.files[0];
+                console.log("file"+file);
+                let param = new FormData(); //创建form对象
+                param.append('file',file,file.name);//通过append向form对象添加数据
+                param.append('chunk','0');//添加form表单中其他数据
+
+                this.fileData = param;
+                console.log(this.fileData.get('file')); //FormData私有类对象，访问不到，可以通过get判断值是否传进去
+            },
+            upload:function () {
+                console.log(this.fileData.get("file"));
+            }
+        }
+    });
+</script>
+</html>

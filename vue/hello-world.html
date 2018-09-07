@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>你好世界</title>
+    <script src="../libs/vue-2.5.16.js"></script>
+</head>
+<body>
+<div id="app">
+    <input type="" placeholder="输入名字" v-model="name">
+    <h3>{{name}}</h3>
+    <button @click="autoInput">修改</button>
+</div>
+
+<script>
+    new Vue({
+        el:'#app',
+        data:{
+            name:'',
+        },
+        methods:{
+            autoInput:function () {
+                this.name = '丽娜';
+            }
+        }
+    });
+</script>
+
+</body>
+</html>

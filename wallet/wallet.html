@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>创建钱包</title>
+    <script src="../libs/vue-2.5.16.js"></script>
+    <script src="network.js"></script>
+</head>
+<body>
+<div id="app">
+    <!--<button v-on:click="createWallet" >{{title}}</button>-->
+    <!--事件缩写形式-->
+    <button @click="createWallet" >{{title}}</button>
+    <p>
+        <code>
+            {{response}}
+        </code>
+    </p>
+
+</div>
+<script>
+
+
+
+    var app = new Vue({
+        el:"#app",
+        data:{
+            "title":"创建钱包",
+            "response":"",
+        },
+        methods:{
+             createWallet:function () {
+                 console.log("创建钱包");
+                 this.response = "请稍后...";
+                 var api = "/user/generateMnemonic";
+                 var _this = this;
+                 hqGet(api,function (response) {
+                     _this.response = response;
+                     console.log("--"+_this.response);
+                 });
+             },
+        },
+    });
+</script>
+</body>
+</html>

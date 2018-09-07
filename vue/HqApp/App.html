@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>App</title>
+    <script src="../../libs/vue-2.5.16.js"></script>
+    <script src="HqComponents/HqList.js"></script>
+</head>
+<body>
+<div id="app">
+    <h1>{{title}}</h1>
+    <hq-list></hq-list>
+</div>
+
+<script>
+
+    var app = new Vue({
+        el:"#app",
+        data:{
+            title:"HqWebApp开发指南",
+        },
+    });
+</script>
+</body>
+</html>

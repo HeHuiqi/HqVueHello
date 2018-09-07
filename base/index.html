@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="../libs/jquery-3.3.1.js"></script>
+    <style type="text/css">
+        .content-list{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        .content-list li{
+            position: relative;
+            margin: 0 0 15px;
+            padding: 15px 2px 20px 0;
+            border-bottom: 1px solid #34e04e;
+            word-wrap: break-word;
+
+        }
+        .content-list .title{
+            font-family: "Al Bayan";
+            font-size: larger;
+            font-weight: bold;
+            text-decoration: none;
+        }
+        .content{
+            font-family: "Al Tarikh";
+            font-size: small;
+        }
+    </style>
+
+</head>
+<body>
+<a class="btn-run" href="http://www.baidu.com">
+    <span class="icon-refresh icon-white"></span> 执行
+</a>
+<div>
+    <ul class="content-list">
+        <li>
+            <a class="title" href="">夏天，这才是凉拌土豆丝最好吃的做法，拌一拌5分钟上桌，特下饭</a>
+            <div>
+                <p class="content">夏天的凉拌菜总是少不了，土豆丝就是常吃的一种，我家更是每周必须吃，天气热的时候，来一盘凉拌的土豆丝，再来一碗稀饭，特别的过瘾，饭也省了，不知道你...</p>
+            </div>
+        </li>
+        <li>
+            <a class="title" href="">你羡慕“小学教师假期多”，我叹“这份职业不轻松”！</a>
+            <div>
+                <p class="content">“百年大计，重在教育”、“教师，是太阳底下最光辉的职业”、“教师是人类灵魂的工程师”。教师，这份职业，得到了很多人的推崇和尊敬。 也有一些人对教... </p>
+            </div>
+        </li>
+    </ul>
+</div>
+</body>
+<script type="text/javascript">
+
+    $(function() {
+        //这里confirm点击确定使才会跳转到百度http://www.baidu.com
+        $(".btn-run").click(function () {
+            return confirm("击确定使才会跳转，确定要立即执行该任务吗？");
+        });
+    });
+</script>
+</html>

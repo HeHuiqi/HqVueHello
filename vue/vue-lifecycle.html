@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue生命周期</title>
+    <!--<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>-->
+    <script src="../libs/vue-2.5.16.js"></script>
+
+</head>
+<body>
+<div id="lifecycle-vue">
+   <p>{{title}}</p>
+    <button v-on:click="refresh">刷新</button>
+    <ul>
+        <li v-for="status in lifecycle">
+            {{status}}
+        </li>
+    </ul>
+</div>
+<script>
+
+    new Vue({
+        el:'#lifecycle-vue',
+        data:{
+            title:'生命周期',
+            count:0,
+            lifecycle:["Default"],
+        },
+        methods:{
+            refresh:function () {
+                this.count++;
+
+                this.title = '刷新数据'+this.count;
+            }
+        },
+
+        beforeCreate:function(){
+            var  a = 10;
+            console.log('创建前=='+a);
+            // this.lifecycle.push('创建前');
+        },
+        created:function () {
+            console.log('创建完成');
+            this.lifecycle.push('创建完成');
+
+        },
+
+        beforeMount:function () {
+            console.log('加载前');
+            this.lifecycle.push('加载前');
+
+        },
+        mounted:function () {
+            console.log('加载完成');
+            this.lifecycle.push('加载完成');
+
+        },
+
+        beforeUpdate:function () {
+            console.log('更新前');
+            // this.lifecycle.push('更新前');
+
+        },
+        updated:function () {
+            console.log('更新完成');
+            // this.lifecycle.push('更新完成');
+
+        },
+
+        beforeDestroy:function () {
+            console.log('销毁了');
+            this.lifecycle.push('销毁了');
+
+        },
+        destroyed:function () {
+            console.log('销毁了');
+            this.lifecycle.push('销毁了');
+
+        },
+
+
+    });
+</script>
+</body>
+</html>

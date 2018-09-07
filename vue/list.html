@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HqList</title>
+    <!--<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>-->
+    <script src="../libs/vue-2.5.16.js"></script>
+</head>
+<body>
+<div id="todo-list-example">
+
+    <button-counter></button-counter>
+    <br>
+    <button-counter></button-counter>
+    <br>
+    <input v-model="newTodoText"
+           v-on:keyup.enter="addNewTodo"
+           placeholder="Add a todo"
+    >
+    <ul>
+        <li is="todo-item"
+            v-for="(todo,index) in todos"
+            v-bind:key="todo.id"
+            v-bind:title="todo.title"
+            v-on:remove="todos.splice(index,1)"
+        ></li>
+    </ul>
+
+</div>
+<script>
+    Vue.component('todo-item',{
+        props:['title'],
+        template:'<li>{{title}} <button v-on:click="$emit(\'remove\')"> X</button></li>',
+    });
+    //组件的data必须是一个函数
+    Vue.component('button-counter',{
+       data:function(){
+           return {count:0};
+       },
+        template:'<button v-on:click="count++">你点击了我{{count}}次</button>',
+        methods:{
+           countAdd:function () {
+               this.count++
+           }
+        }
+
+    });
+    new Vue({
+        el:'#todo-list-example',
+        data:{
+          newTodoText:'',
+          todos:[
+              {id:1,title:'Do the dishes'},
+              {id:2,title:'Take out the trash'},
+              {id:3,title:'Now the lawn'},
+          ],
+            nextTodoId:4,
+        },
+       methods:{
+           addNewTodo:function () {
+                this.todos.push({id:this.nextTodoId++,title:this.newTodoText});
+                this.nextTodoId = '';
+            }
+       }
+    })
+</script>
+
+</body>
+</html>

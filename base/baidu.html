@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>百度一下</title>
+    <style type="text/css">
+        .header{
+            margin-top: 5%;
+            width: 270px;
+            margin-left: auto;
+            margin-right: auto;
+
+        }
+        .hq-baidu{
+            width:270px;
+            height:129px;
+            cursor: pointer;
+        }
+        .search{
+            width: 651px;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 5%;
+        }
+        .user-input-container {
+            border: 1px solid #b6b6b6;
+            width: auto;
+            height: 34px;
+            border-right-width: 0;
+        }
+        .user-input-container,.submit-btn{
+            float: left;
+        }
+        .user-input{
+            border: 0px;
+            width: 531px;
+            font-size: 15px;
+            height: 32px;
+            margin-left: 5px;
+            outline: none;
+        }
+        .submit-btn {
+            border: 1px solid #3385ff;
+            background-color: #3385ff;
+            color: white;
+            width: 100px;
+            height: 36px;
+            font-size: 15px;
+            cursor: pointer;
+            outline: none;
+
+        }
+        .submit-btn:hover{
+            background-color: #317ef3;
+        }
+
+    </style>
+</head>
+<body>
+<div id="app">
+    <div class="header">
+        <a href="https://www.baidu.com/">
+            <img hidefocus="true" class="hq-baidu" src="//www.baidu.com/img/gif_dff8eb67abcf1c24f800c7459ff73ae0.gif">
+        </a>
+    </div>
+    <form class="search">
+    <span class="user-input-container">
+            <input class="user-input" placeholder="百度一下，你就知道！" >
+    </span>
+        <input class="submit-btn" type="submit" value="百度一下">
+    </form>
+</div>
+
+</body>
+</html>

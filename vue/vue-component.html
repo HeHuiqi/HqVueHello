@@ -6,69 +6,69 @@
     <!--<script src="https://vuejs.org/js/vue.js"></script>-->
     <script src="../libs/vue-2.5.16.js"></script>
 
-    <style type="text/css">
-        .demo-alert-box{
-            padding-top: 5px;
-            background-color: #eee7cf;
-            width: 150px;
-            text-align: center;
-            color: #ee3b2a;
-            border-radius: 2px;
-            height: 30px;
-        }
-    </style>
+
 
 </head>
 <body>
 
-<div id="blog">
+<div id="app">
 
 
-    <!--这里v-on会监听enlarge-text事件，监听到事件后增大字体-->
-    <div :style="{ fontSize: blogFontSize + 'em' }">
-        <blog-detail
-                v-for="blog in blogs"
-                v-bind:key="blog.id"
-                v-bind:blog="blog"
-                v-on:enlarge-text="blogFontSize += $event"
-        ></blog-detail>
-    </div>
-    <br>
-    <!--这里元素的内容会插入的alert-box组件内部-->
-    <alert-box>
-        坏事发生了
-    </alert-box>
+    <!--使用局部注册的组件，并设置属性值引用父组件data中的birdName-->
+    <my-child v-bind:name="birdName"></my-child>
+    <!--如果直接设置属性值是，可以用字符串数组或着对象-->
+    <my-child :name="['海燕']"></my-child>
+
+    <person :name="'犀利哥'" :age="18" :sex="false" :love="['跑步','看电影','写代码']"></person>
+
 
 </div>
 <script>
 
-    //$emit触发enlarge-text事件,增大字体
-    Vue.component('blog-detail', {
-        props: ['blog'],
-        template: `
-    <div style="background-color: cadetblue">
-      <h1>{{ blog.title }}</h1>
-      <div v-html="blog.content"></div>
-      <button v-on:click="$emit('enlarge-text',0.1)">放大字体</button>
 
-    </div>
-  `
-    })
 
-    //插槽模式
-    Vue.component('alert-box', {
+    /*注意在组件中data必须有返回值的函数,props是这个组件的属性，属性必须是字符串数组或对象*/
+
+    var child = {
+        props:['name'],
+        data: function () {
+            return {
+              bird:'我是困在笼子里的'+this.name+'，失去了自由！！！',
+            };
+        },
         template: `
-    <div class="demo-alert-box">
-      <strong>Error!</strong>
-      <slot></slot>
-    </div>
-  `
-    })
+         <div>{{bird}}</div>`,
+    };
+
+    /*组件数据验证,注意这里对数据的限制，包括数据类型、是否必传,页可以给组件设置默认值*/
+    var person = {
+        props:{
+            name:{
+                type:String,
+                default:'',
+                required:true,
+            },
+            age:Number,
+            sex:Boolean,
+            love:{
+                type:Array,
+            }
+        },
+        data:function () {
+            return {};
+        },
+        template:`
+           <div><p>姓名：{{name}} 年龄：{{age}} 性别：{{sex? '男':'女'}} 爱好：{{love}}</p></div>`,
+    };
     new Vue({
-        el: '#blog',
+        el: '#app',
         data: {
-            blogs: [{id:1,title:'今天吃小龙虾',content:'<h2>吃小龙虾好开心吃小龙虾好开心吃小龙虾好开心吃小龙虾好开心</h2>'},],
-            blogFontSize: 1
+            birdName:'老鹰',
+        },
+        /*局部注册组件，注意组件的名称*/
+        components: {
+            'my-child': child,
+            'person':person,
         }
     })
 </script>

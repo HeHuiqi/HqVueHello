@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>组件2</title>
+
+</head>
+<body>
+<div id="app">
+
+    <!--这里v-on会监听enlarge-text事件，监听到事件后增大字体-->
+    <div :style="{ fontSize: blogFontSize + 'em' }">
+        <my-blog
+                v-for="blog in blogs"
+                v-bind:key="blog.id"
+                v-bind:blog="blog"
+                v-on:enlarge-text="zoomOut"
+        ></my-blog>
+    </div>
+    <br>
+
+
+
+    <p>总数：{{ total }}</p>
+    <my-counter @increase="handleGetTotal" @reduce="handleGetTotal"></my-counter>
+
+</div>
+</body>
+<script src="../libs/vue-2.5.16.js"></script>
+<script>
+
+
+
+    /*$emit触发enlarge-text事件,增大字体,$emit( eventName, […args] )
+    * 子组件用 $emit()来触发事件，父组件用$on()来 监昕子组件的事件 。
+    * */
+    var myBlog = {
+        props: ['blog'],
+        template: `
+    <div style="background-color: #a0a053">
+      <h1>{{ blog.title }}</h1>
+      <div v-html="blog.content"></div>
+      <button v-on:click="$emit('enlarge-text',0.1)">放大字体</button>
+    </div>
+  `
+    };
+
+    var myCounter = {
+        data: function () {
+            return {
+                counter: 0,
+            }
+        },
+        template: `
+<div>
+    <button @click="handleIncrease">+1</button>
+    <button @click="handleReduce" :disabled="counter === 0">-1</button>
+</div>
+    `,
+        methods: {
+            handleIncrease: function () {
+                this.counter++;
+                this.$emit('increase', this.counter);
+            },
+            handleReduce: function () {
+                if (this.counter === 0) return;
+                this.counter--;
+                this.$emit('reduce', this.counter);
+            },
+        },
+    };
+
+    /*全局注册组件*/
+    Vue.component('my-blog', myBlog);
+    Vue.component('my-counter',myCounter);
+
+    new Vue({
+        el: '#app',
+        data: {
+            blogs: [{id: 1, title: '来一场彻底的革命', content: '<h2>2018年革命爆发，数百位的年轻男女投身到革命中来。。。</h2>'},],
+            blogFontSize: 1,
+            total: 0,
+        },
+        methods: {
+            zoomOut: function (size) {
+                console.log(size);
+                this.blogFontSize += size;
+            },
+            handleGetTotal: function (total) {
+                this.total = total;
+            }
+        }
+    })
+
+</script>
+</html>

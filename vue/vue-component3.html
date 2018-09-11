@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>组件3</title>
+</head>
+<body>
+<div id="app">
+    <p>{{ message }}</p>
+    <hq-component></hq-component>
+
+    <!--通过指定ref属性后，父组件可以通过$refs来访问子组件-->
+    <hq-child ref="hqChild"></hq-child>
+    <button @click="handleRef">获取子组件内容</button>
+
+</div>
+</body>
+<script src="../libs/vue-2.5.16.js"></script>
+<script>
+
+    /*通过创建一个空的Vue实例作为中介来触发事件和监听事件*/
+    var bus = new Vue();
+    Vue.component('hq-component',{
+        template:`<button @click="handleEvent">传递事件</button>`,
+        methods:{
+            handleEvent:function () {
+                //中介触发on-message事件并传递内容
+                bus.$emit('on-message','来子组件hq-component的内容');
+            }
+        }
+    });
+
+    Vue.component('hq-child',{
+        template:`<div>子组件</div>`,
+        data:function () {
+            return {message:'子组件的内容'};
+        }
+    });
+    new Vue({
+        el:'#app',
+        data:{
+            message:''
+        },
+        methods:{
+            handleRef:function () {
+                /*
+                * $refs渲染完成后才填元，并且它是非响应式的. 它仅仅作为一个直接访问子
+                * 组件的应急方案，应当避免在模板或计算属性中使用$refs。
+                * */
+              //通过$refs来访问指定的实例
+              var msg = this.$refs.hqChild.message;
+              this.message = msg;
+            },
+
+        },
+        //页面加载完成是自动调用该函数
+        mounted:function () {
+          var _this = this;
+          //中介监听到on-message事件出来接收到的内容
+          bus.$on('on-message',function (msg) {
+             _this.message = msg;
+          });
+        }
+    });
+</script>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>表单</title>
+</head>
+<body>
+<div id="app">
+
+    <!--通过方法来改变message-->
+    <input @input="handleInput" placeholder="输入...">
+    <!--v-model指令自动绑定message-->
+    <input v-model="message" placeholder="请输入。。。">
+    <p>输入的内容是：{{message}}</p>
+
+
+    <!--单选-->
+    <input type="radio" v-model="picked" value="html">
+    <label>HTML</label>
+
+    <input type="radio" v-model="picked" value="js">
+    <label>JavaScript</label>
+
+    <input type="radio" v-model="picked" value="css">
+    <label>CSS</label>
+    <p>您的选择是：{{picked}}</p>
+
+    <!--多选-->
+    <input type="checkbox" v-model="checked" value="html">
+    <label>HTML</label>
+
+    <input type="checkbox" v-model="checked" value="js">
+    <label>JavaScript</label>
+
+    <input type="checkbox" v-model="checked" value="css">
+    <label>CSS</label>
+    <p>您的选择是：{{checked}}</p>
+
+    <!--下拉单选-->
+    <select v-model="selected" >
+        <option value="html">html</option>
+        <option>JavaScript</option>
+        <option>css</option>
+    </select>
+    <p>您的选择是：{{selected}}</p>
+
+
+    <!--下拉多选-->
+    <select v-model="multipleSelected" multiple>
+        <option value="html">html</option>
+        <option>JavaScript</option>
+        <option>css</option>
+    </select>
+    <p>您的选择是：{{multipleSelected}}</p>
+
+
+    <!--lazy修饰符只要当按键按下时才会改变message,使用修饰符 .lazy会转变为在 change 事件中同步-->
+    <input type="text" v-model.lazy="message" placeholder="输入...">
+    <p>按键Enter按下时显示输入的内容：{{message}}</p>
+
+    <!--输入的字符串数字会变成Number类型-->
+    <input type="text" v-model.number="message" placeholder="输入...">
+    <p>您输入的内容：{{message}}</p>
+
+    <!--输入的内容是红trim修饰时会去掉首尾的空格-->
+    <input type="text" v-model.trim="message" placeholder="输入...">
+    <p>您输入的内容：{{message}}</p>
+
+
+
+
+</div>
+
+</body>
+<script src="../libs/vue-2.5.16.js"></script>
+<script>
+    new Vue({
+        el:'#app',
+        data:{
+            message:'',
+            picked:'',
+            checked:[],
+            selected:'html',
+            multipleSelected:['html','css'],
+        },
+        methods:{
+            handleInput:function (e) {
+                this.message = e.target.value;
+            }
+        }
+    });
+</script>
+</html>

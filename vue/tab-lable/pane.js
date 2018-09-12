@@ -24,8 +24,12 @@ Vue.component('pane',{
         }
     },
     watch:{
-        lable:function f() {
-            this.updateNav();
-        }
+            lable:function f() {
+                this.updateNav();
+            }
     },
+    //这里不再调用，在父组件tabs中的mounted()
+    // mounted:function () {
+    //     this.updateNav();
+    // }
 });

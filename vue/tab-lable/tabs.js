@@ -30,7 +30,9 @@ Vue.component('tabs',{
                return item.$options.name === 'pane'; 
             });
         },
+        //这个方法会在子组件更新时通过pane.$parent自动调用
         updateNav:function () {
+            console.log("tabs----");
             this.navList = [];
             //设置this的引用，在function回调里，this指向并不是Vue实例
             var _this = this;
@@ -76,6 +78,7 @@ Vue.component('tabs',{
         }
 
     },
+    //这里调用后会自动渲染子组件pane
     mounted:function () {
         this.updateNav();
     }

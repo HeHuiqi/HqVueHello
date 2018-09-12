@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>使用Vue的render函数来创建组件</title>
+
+    <style type="text/css">
+       .zujian3 {
+           color: #fff;
+           font-size: 14px;
+           background-color:#72c2ff;
+           border-radius:5px;
+           width:100px;
+           height:36px;
+           font-weight:100;
+           line-height:36px;
+           padding:0px 5px 0px 5px;
+       }
+    </style>
+</head>
+<body>
+
+<div id="app">
+    <h1>{{ example }}</h1>
+    <child></child>
+    <child2></child2>
+    <child3></child3>
+
+</div>
+</body>
+<script src="../libs/vue-2.5.16.js"></script>
+
+<script>
+
+    var  child = {
+        template:'<p>子组件1</p>'
+    }
+    //使用render函数来创建组件
+
+    /*
+createElement()函数参数说明
+// @returns {VNode}
+createElement(
+  // {String | Object | Function}
+  // 一个 HTML 标签字符串，组件选项对象，或者
+  // 解析上述任何一种的一个 async 异步函数，必要参数。
+  'div',
+
+  // {Object}
+  // 一个包含模板相关属性的数据对象
+  // 这样，您可以在 template 中使用这些属性。可选参数。
+  {
+    // (详情见下一节)
+  },
+
+  // {String | Array}
+  // 子节点 (VNodes)，由 `createElement()` 构建而成，
+  // 或使用字符串来生成“文本节点”。可选参数。
+  [
+    '先写一些文字',
+    createElement('h1', '一则头条'),
+    createElement(MyComponent, {
+      props: {
+        someProp: 'foobar'
+      }
+    })
+  ]
+)
+ */
+    var child2 = {
+        render:function(createElement){
+
+            return createElement('p','子组件2');
+        }
+    };
+
+    var child3 = {
+        data:function () {
+            return {
+                message:'默认值-可点击',
+                isClick:false,
+                isActive:false,
+            };
+        },
+        render:function(createElement){
+
+            return createElement('div',
+                {
+                    /*
+                    style: {
+
+                        color: '#fff',
+                        fontSize: '14px',
+                        backgroundColor:'#72c2ff',
+                        borderRadius:'5px',
+                        width:'100px',
+                        height:'36px',
+                        fontWeight:'100',
+                        lineHeight:'36px',
+                        padding:'0px 5px 0px 5px'
+
+
+                    },
+                    */
+                    class:{
+                      'zujian3':this.isActive
+                    },
+                    on:{
+                        click:this.handleClick,
+                    }
+                },
+                [createElement('p',this.message)]);
+        },
+        methods:{
+            handleClick:function () {
+
+                //控制class属性的添加和移除
+                this.isActive = !this.isActive;
+
+                this.isClick = !this.isClick;
+                this.message = this.isClick ? '子组件3':'默认值-可点击';
+            }
+        },
+        mounted:function () {
+          console.log(this.message);
+        }
+    };
+
+    Vue.component('child',child);
+    Vue.component('child2',child2);
+    Vue.component('child3',child3);
+
+
+
+    var app = new Vue({
+        el:'#app',
+        data:{
+            example:'render函数例子'
+        }
+    });
+
+    console.log(app.example);
+
+</script>
+
+</html>

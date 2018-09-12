@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>自定义指令</title>
+</head>
+<body>
+
+<div id="app">
+    <input type="text" v-focus>
+</div>
+
+</body>
+<script src="../libs/vue-2.5.16.js"></script>
+<script>
+
+    /*bind: 只调用一次，指令第一次绑定到元素 时调用，用这个钩子函数可以定义一个在绑 定 时执行一次的初始化动作.
+    * inserted: 被绑定元素插入父节点时调用(父节点存在即可调用，不必存在于 document 中) .
+    * update: 被绑定元素所在的模板更新时调用，而不论绑定值是否变化。通过比较更新前后的绑定值，可以忽略不必要的模板更新。
+    * unbind: 只调用一次，指令与元素解绑时调 用 。
+    * componentUpdated: 被绑定元素所在模板完成一次更新周期时调用.
+    * */
+    Vue.directive('focus',{
+        inserted:function (el) {
+            setTimeout(function () {
+                //获取焦点
+                el.focus();
+            },2000)
+
+        }
+    });
+
+    new  Vue({
+
+    }).$mount('#app');
+</script>
+</html>

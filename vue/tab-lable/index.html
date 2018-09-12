@@ -9,7 +9,7 @@
 
 <div id="app" v-cloak>
 
-    <tabs>
+    <tabs v-model="activeKey">
         <pane label="标签1" name="1">
              标签1的内容
         </pane>
@@ -18,6 +18,15 @@
         </pane>
         <pane label="标签3" name="3">
             标签3的内容
+        </pane>
+        <pane label="标签4" name="4">
+            标签4的内容
+        </pane>
+        <pane label="标签5" name="5">
+            标签5的内容
+        </pane>
+        <pane label="标签6" name="6">
+            标签6的内容
         </pane>
     </tabs>
 
@@ -31,8 +40,10 @@
 <script>
     new Vue({
         el:'#app',
+
         data:{
-            activeKey:true
+            //设置默认选中第2个标签
+            activeKey:"2"
         }
     });
 </script>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>使用Render创建表格并排序</title>
+    <link rel="stylesheet" type="text/css" href="table-style.css">
+</head>
+<body>
+<div id="app">
+
+    <v-table :columns="columns" :data="data"></v-table>
+    <button @click="handleAddData">添加数据</button>
+    
+
+</div>
+
+</body>
+<script src="../../libs/vue-2.5.16.js"></script>
+<script src="table.js"></script>
+<script>
+    new Vue({
+        el:'#app',
+        data:{
+            columns:[
+                {
+                    title:'姓名',
+                    key:'name',
+                },
+                {
+                    title:'年龄',
+                    key:'age',
+                    sortable:true,
+                },
+                {
+                    title:'出生日期',
+                    key:'birthday',
+                    sortable:true,
+                },
+                {
+                    title:'地址',
+                    key:'address',
+                },
+            ],
+            data:[
+                {
+                    name:'王小二',
+                    age:18,
+                    birthday:'1999-02-21',
+                    address:'上海浦东新区'
+                },
+                {
+                    name:'张小龙',
+                    age:25,
+                    birthday:'1909-02-21',
+                    address:'上海杨浦'
+                },
+                {
+                    name:'李小飞',
+                    age:30,
+                    birthday:'1989-02-21',
+                    address:'上海宝山'
+                }
+
+            ],
+        },
+        methods:{
+            handleAddData:function () {
+
+                this.data.push({
+                    name:'钱大纲',
+                    age:Math.floor(Math.random()*100+1),
+                    birthday:'1799-02-21',
+                    address:'江苏南京'
+                });
+                console.log(this.data);
+            }
+        }
+    });
+</script>
+</html>

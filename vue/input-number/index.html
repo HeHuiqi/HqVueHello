@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>数字输入组件</title>
+</head>
+<body>
+<div id="app">
+    <input-number v-model="value" :max="10" :min="0"></input-number>
+</div>
+</body>
+<script src="../../libs/vue-2.5.16.js"></script>
+<script src="input-number.js"></script>
+<script>
+    new Vue({
+        el:'#app',
+        data: {
+            value:5
+        }
+    });
+</script>
+</html>

@@ -7,19 +7,26 @@ Vue.component('v-input',{
             default:'',
         },
     },
+    data:function(){
+        return {
+            inputValue:this.value,
+        }
+    },
     render:function (h) {
       var _this = this;
       return h('div',[h('span','昵称：'),
           h('input',{
               attrs:{
-                  type:'text'
+                  type:'text',
               },
               domProps:{
                   value: this.value,
+                  maxLength:'5',
+
               },
               on:{
                   input:function (event) {
-                      _this.value = event.target.value;
+                      _this.inputValue = event.target.value;
                       _this.$emit('input',event.target.value);
                   }
               }
@@ -36,6 +43,11 @@ Vue.component('v-textarea',{
             default:'',
         },
     },
+    data:function(){
+        return {
+            inputValue:this.value,
+        }
+    },
     render:function (h) {
         var _this = this;
         return h('div',[h('span','留言内容：'),
@@ -49,11 +61,16 @@ Vue.component('v-textarea',{
                 ref:'message',
                 on:{
                     input:function (event) {
-                        _this.value = event.target.value;
+                        _this.inputValue = event.target.value;
                         _this.$emit('input',event.target.value);
                     }
                 }
 
             })]);
     },
+    methods:{
+        focus:function () {
+            this.$refs.message.focus();
+        }
+    }
 });

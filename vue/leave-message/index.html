@@ -3,19 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <title>留言板</title>
+    <link rel="stylesheet" type="text/css" href="message-style.css">
 </head>
 <body>
 <div id="app" style="width: 500px;margin: 0 auto">
 
     <div class="message">
-
+        <v-input v-model="username"></v-input>
+        <v-textarea v-model="message" ref="message"></v-textarea>
+        <button @click="handleSend">发布</button>
     </div>
+    <v-list :list="list" @reply="handleReply"></v-list>
 
 </div>
 
 </body>
 <script src="../../libs/vue-2.5.16.js"></script>
 <script src="message-input.js"></script>
+<script src="mesage-list.js"></script>
 <script>
     new Vue({
         el:'#app',
@@ -26,6 +31,8 @@
         },
         methods:{
             handleSend:function () {
+                console.log('send');
+
                 if (this.username === ''){
                     alert('请输入昵称');
                     return;
@@ -41,6 +48,7 @@
                 this.message = '';
             },
             handleReply:function (index) {
+                console.log("哈哈哈哈");
                 var name = this.list[index].name;
                 this.message = '回复@'+name + '：';
             }

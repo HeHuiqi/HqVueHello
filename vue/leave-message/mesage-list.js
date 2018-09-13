@@ -8,6 +8,7 @@ Vue.component('v-list',{
         },
     },
     render:function (h) {
+
         var _this = this;
         var list = [];
         this.list.forEach(function (msg,index) {
@@ -25,10 +26,10 @@ Vue.component('v-list',{
                 },[h('p',msg.message),h('a',{
                     attrs:{
                         class:'list-reply',
-                        on:{
-                            click:function () {
-                                _this.handleReply(index);
-                            }
+                    },
+                    on:{
+                        click:function () {
+                            _this.handleReply(index);
                         }
                     }
                 },'回复')]),
@@ -52,6 +53,7 @@ Vue.component('v-list',{
     methods:{
 
         handleReply:function (index) {
+            console.log(' rrr')
             this.$emit('reply',index);
         }
     }

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        ul,li{
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            border-collapse: collapse;
+        }
+        .nav {
+            float: left;
+            padding: 10px 10px;
+            border: 1px solid #cccccc;
+        }
+        .subNav {
+            display: none;
+
+        }
+        .subNav li {
+            padding-top: 10px;
+            border-bottom: 1px solid #ee3b2a;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <ul >
+        <li class="nav" onmouseenter="mouseIn(this)" onmouseleave="mouseOut(this)" style="background-color: #4a90b1">
+            第一章
+            <ul class="subNav">
+                <li>第1节</li>
+                <li>第2节</li>
+                <li>第3节</li>
+                <li>第4节</li>
+                <li>第5节</li>
+                <li>第6节</li>
+            </ul>
+        </li>
+        <li class="nav" onmouseenter="mouseIn(this)" onmouseleave="mouseOut(this)" style="background-color: #4a90b1">
+            第二章
+            <ul class="subNav">
+                <li>第1节</li>
+                <li>第2节</li>
+                <li>第3节</li>
+            </ul>
+        </li>
+
+        <li class="nav" onmouseenter="mouseIn(this)" onmouseleave="mouseOut(this)" style="background-color: #4a90b1">
+            第二章
+            <ul class="subNav">
+                <li>第1节</li>
+                <li>第2节</li>
+                <li>第3节</li>
+                <li>第4节</li>
+                <li>第5节</li>
+                <li>第6节</li>
+            </ul>
+        </li>
+    </ul>
+</div>
+<script>
+    function mouseIn(el) {
+        // var el = e.target.elements[0];
+        el = el.childNodes[1];
+        console.log("iiiii");
+
+        el.style.display="block";
+    }
+    function mouseOut(el) {
+        // var el = e.target.elements[0];
+        el = el.childNodes[1];
+        console.log("0000000");
+
+
+        el.style.display="none";
+    }
+</script>
+</body>
+</html>
